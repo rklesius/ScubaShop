@@ -22,13 +22,40 @@ SQL Queries
 	
 	** We can have the user input a cert level **
 	
-2) Want to be able to find all the dives where max_depth > 100 and cert_level required is < 3
-	SELECT DTID, Location, Max_Depth, Cert_level_req From dive_trips WHERE Max_Depth > 100 and Cert_level_req < 3
+2) Want to be able to find all the dives where max_depth < a certain value
+	      <th>DTID</th>
+          <th>Location</th>
+          <th>Max Depth</th>
+          <th>Certification</th>
+        </tr>
+        <%db = SQLite3::Database.open('scubashop.db') %>
+        <% i = 0 %>
+        <%db.execute("SELECT DISTINCT dive_trips.DTID, dive_trips.Location, dive_trips.Max_depth, dive_trips.Cert_level_req FROM dive_trips WHERE dive_trips.Max_depth < 250
+    	") do |result| %>
+            <tr style="text-align: center; padding: 8px;">
+              <td><%=result[0]%></td>
+              <td><%=result[1]%></td>
+              <td><%=result[2]%></td>
+              <td><%=result[3]%></td>
+            </tr>
 	
-	** We can have the user input a max depth and cert level to find the dives **
+	** We can have the user input a max depth **
 
-3) Find the dives where the Employee leading the dive has worked for the company for more than 5 years
-   SELECT E.E_name, E. Yrs_worked, DT.DTID FROM dive_trips as DT JOIN Employees as E on DT.EID = E.EID WHERE E.Yrs_worked > 5
+3) Find  where the dives and their lead employee
+
+   <th>Name</th>
+         <th>EID</th>
+         <th>Location</th>
+       </tr>
+       <%db = SQLite3::Database.open('scubashop.db') %>
+       <% i = 0 %>
+       <%db.execute("SELECT DISTINCT employees.E_name, employees.EID, dive_trips.Location FROM dive_trips INNER JOIN employees ON dive_trips.EID = employees.EID
+   	") do |result| %>
+           <tr style="text-align: center; padding: 8px;">
+             <td><%=result[0]%></td>
+             <td><%=result[1]%></td>
+             <td><%=result[2]%></td>
+           </tr>
    
    **We can have the user input a year amount to find a leader who has a lot of experience or not a lot of experience**
    
@@ -53,7 +80,7 @@ SQL Queries
    
    **We can have the user input a DTID number so they can see who is coming with them **
    
-5)
-6)
-7)
+5) Give all the divers of a certain cert level
+6) Find all the employees who are leading a dive who have worked at the company for more than 4 years
+7) Find all the dives where only one person is going
 8)
