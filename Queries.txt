@@ -1,7 +1,24 @@
 SQL Queries
 
 1) Want to be able to find all the divers that can go on a certain trip based on cert level
-	SELECT D.Name,D.Email,D.DTID From Divers as D Join Dive_trips as DT on D.DTID = DT.DTID WHERE DT.Cert_level_req = D.Cert_level
+      
+
+<th>DTID</th>
+      <th>Location</th>
+      <th>Max Depth</th>
+      <th>Certification Level</th>
+      <th>Cost</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT DTID, Location, Max_depth, Cert_level_req, Cost_per_diver FROM dive_trips WHERE Cert_level_req < 3
+	") do |result| %>
+        <tr style="text-align: center; padding: 8px;">
+          <td><%=result[0]%></td>
+          <td><%=result[1]%></td>
+          <td><%=result[2]%></td>
+          <td><%=result[3]%></td>
+          <td><%=result[4]%></td>
 	
 	** We can have the user input a cert level **
 	
@@ -15,8 +32,24 @@ SQL Queries
    
    **We can have the user input a year amount to find a leader who has a lot of experience or not a lot of experience**
    
-4) Find all the divers going on a trip (for my case trip 1)
-   SELECT DID, Name, Cert_level FROM Divers WHERE DTID = 1
+4) Find all the divers going on a trip, returns Name, Certification, DTID, Location, Max_depth
+   
+<th>Name</th>
+      <th>Certification</th>
+      <th>DTID</th>
+      <th>Location</th>
+      <th>Max Depth</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT divers.dname, divers.cert_lvl, dive_trips.DTID, dive_trips.Location, dive_trips.Max_depth FROM dive_trips INNER JOIN divers ON divers.dtid = dive_trips.DTID
+	") do |result| %>
+        <tr style="text-align: center; padding: 8px;">
+          <td><%=result[0]%></td>
+          <td><%=result[1]%></td>
+          <td><%=result[2]%></td>
+          <td><%=result[3]%></td>
+          <td><%=result[4]%></td>
    
    **We can have the user input a DTID number so they can see who is coming with them **
    
