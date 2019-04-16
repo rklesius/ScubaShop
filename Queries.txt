@@ -81,6 +81,65 @@ SQL Queries
    **We can have the user input a DTID number so they can see who is coming with them **
    
 5) Give all the divers of a certain cert level
-6) Find all the employees who are leading a dive who have worked at the company for more than 4 years
+
+ <th>Name</th>
+      <th>Email</th>
+      <th>Certification</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT dname, email, cert_lvl FROM divers WHERE cert_lvl > 3
+	") do |result| %>
+        <tr style="text-align: center; padding: 8px;">
+          <td><%=result[0]%></td>
+          <td><%=result[1]%></td>
+          <td><%=result[2]%></td>
+        </tr>
+
+        ** We can have the user input the cert level they are looking for an above **
+
+6) Find all the employees who are leading a dive who have worked at the company for more than 3 years
+
+<th>Name</th>
+      <th>EID</th>
+      <th>Location</th>
+      <th>Certification Required</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT employees.E_name, employees.EID, dive_trips.Location, dive_trips.Cert_level_req FROM dive_trips INNER JOIN employees ON dive_trips.EID = employees.EID WHERE employees.Yrs_worked >= 3
+   	") do |result| %>
+      <tr style="text-align: center; padding: 8px;">
+        <td><%=result[0]%></td>
+        <td><%=result[1]%></td>
+        <td><%=result[2]%></td>
+        <td><%=result[3]%></td>
+      </tr>
+
 7) Find all the dives where only one person is going
+
+<th>DTID</th>
+      <th>Location</th>
+      <th>Number of Participants</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT divers.dtid, dive_trips.Location,COUNT(*) FROM dive_trips INNER JOIN divers ON dive_trips.DTID = divers.dtid GROUP BY divers.dtid, dive_trips.Location HAVING COUNT(divers.dtid) = 1
+   	") do |result| %>
+      <tr style="text-align: center; padding: 8px;">
+        <td><%=result[0]%></td>
+        <td><%=result[1]%></td>
+        <td><%=result[2]%></td>
+      </tr>
+
+      ** Can change number of people **
+
+      ********* NOTE:
+
+                THIS ONLY WORKS IF THERE IS ONE COPY OF ALL THE DATA IN THE TABLE. ONCE YOU WANT TO INSERT NEW DATA INTO THE TABLE, IT MESSES UP
+                IT SHOULD BE FINE FOR THE FINAL COPY
+                WHEN RUNNING THIS QUERY FOR RIGHT NOW  ---> NEED TO DROP TABLES, THEN RECREATE, THEN INSERT DATA
+
+      *****
+
 8)
