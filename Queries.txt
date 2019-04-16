@@ -142,4 +142,20 @@ SQL Queries
 
       *****
 
-8)
+8) Find the total earnings made on each trip
+
+<th>DTID</th>
+      <th>Number of Participants</th>
+      <th>Total Earnings</th>
+    </tr>
+    <%db = SQLite3::Database.open('scubashop.db') %>
+    <% i = 0 %>
+    <%db.execute("SELECT DISTINCT divers.dtid,COUNT(*) as Count, SUM(dive_trips.Cost_per_diver) FROM dive_trips INNER JOIN divers ON dive_trips.DTID = divers.dtid GROUP BY divers.dtid, dive_trips.Location
+   	") do |result| %>
+      <tr style="text-align: center; padding: 8px;">
+        <td><%=result[0]%></td>
+        <td><%=result[1]%></td>
+        <td><%=result[2]%></td>
+      </tr>
+
+ ** This one i guess you wouldn't need a user input **
