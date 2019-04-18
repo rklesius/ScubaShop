@@ -10,4 +10,22 @@ db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALU
 db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALUES(?, ?, ?, ?, ?, ?)",
            [2, 'edduffy@gmail.com', 'password1', 'Edward Duffy', 3, 0 ])
 db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALUES(?, ?, ?, ?, ?, ?)",
-           [3, 'willfink@gmail.com', 'cat1234', 'William Fink', 5, 0 ])
+           [3, 'willfink@gmail.com', 'cat1234', 'William Fink', 5, 1 ])
+db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALUES(?, ?, ?, ?, ?, ?)",
+           [4, 'samreese@gmail.com', 'sealions', 'Sam Reese', 4, 2 ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
+           [3, 'John', 15000, 'Sir', 5, 'johnsmith@gmail.com' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
+           [1, 'Michael', 15000, 'Mid', 3, 'mikedavis@gmail.com' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
+           [2, 'Tyler', 20000, 'Lead', 7, 'raggle1221@gmail.com' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
+           [4, 'Sarah', 13500, 'Newhire', 1, 'sarahfuss@gmail.com' ])
+db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
+           [0, "Gulf of Mexico",300,0,2,150.25])
+db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
+           [1, "Gulf of Mexico",200,3,3,150.25])
+db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
+           [5, "Lake Apopka",100,1,2,45])
+db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
+           [2, "Tampa Bay",170,4,1,35])
