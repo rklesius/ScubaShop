@@ -29,7 +29,8 @@ create table employees(
  Salary int,
  Title varchar[50],
  Yrs_worked int,
- Email varchar[50]
+ Email varchar[50],
+ password varchar[20]
 );
 SQL
 
@@ -56,14 +57,14 @@ db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALU
 db.execute("INSERT INTO divers(did, email, password, dname, cert_lvl, dtid) VALUES(?, ?, ?, ?, ?, ?)",
            [4, 'samreese@gmail.com', 'sealions', 'Sam Reese', 4, 2 ])
 
-db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
-           [3, 'John', 15000, 'Sir', 5, 'johnsmith@gmail.com' ])
-db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
-           [1, 'Michael', 15000, 'Mid', 3, 'mikedavis@gmail.com' ])
-db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
-           [2, 'Tyler', 20000, 'Lead', 7, 'raggle1221@gmail.com' ])
-db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email) VALUES(?, ?, ?, ?, ?, ?)",
-           [4, 'Sarah', 13500, 'Newhire', 1, 'sarahfuss@gmail.com' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email, password) VALUES(?, ?, ?, ?, ?, ?, ?)",
+           [3, 'John', 15000, 'Sir', 5, 'johnsmith@gmail.com', 'password' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email, password) VALUES(?, ?, ?, ?, ?, ?, ?)",
+           [1, 'Michael', 15000, 'Mid', 3, 'mikedavis@gmail.com', 'password' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email, password) VALUES(?, ?, ?, ?, ?, ?, ?)",
+           [2, 'Tyler', 20000, 'Lead', 7, 'raggle1221@gmail.com', 'password' ])
+db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email, password) VALUES(?, ?, ?, ?, ?, ?, ?)",
+           [4, 'Sarah', 13500, 'Newhire', 1, 'sarahfuss@gmail.com', 'password' ])
 
 db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
            [0, "Gulf of Mexico",300,0,2,150.25])

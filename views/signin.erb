@@ -1,0 +1,22 @@
+<%
+  db = SQLite3::Database.open('scubashop.db')
+  diverlogin = db.execute("SELECT DISTINCT COUNT(did) FROM divers WHERE email=? and password=?", [ @email, @password ])
+  puts "diver count: "
+  puts diverlogin
+  if diverlogin[0][0] > 0
+    session[:email] = @email
+    redirect to ('/diver')
+  end
+
+  emplogin = db.execute("SELECT DISTINCT COUNT(EID) FROM employees WHERE Email=? and password=?", [ @email, @password ])
+
+  #if employee found, login as employee
+  if emplogin[0][0] > 0
+    session[:email] = @email
+    redirect to('/dive-master')
+  end
+
+  #if not redirected yet, error
+  session.clear
+  redirect to('/')
+%>
