@@ -12,11 +12,10 @@ get '/' do
   erb :login
 end
 
-get '/login' do  #TODO: define sessions
+get '/login' do
   @email = params[:username]
   @password = params[:password]
   erb :signin
-
 end
 
 #showing information for a diver
