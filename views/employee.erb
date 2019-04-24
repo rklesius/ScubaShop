@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TutorHub</title>
+  <title>Bubble's Scuba Shop</title>
   <link rel="icon" type="image/ico" href="/img/logo.jpg" />
 
 
@@ -31,6 +31,41 @@
 </div>
 
 <h1>Welcome Dive Master!</h1>
+
+<br/>
+
+<div class="row">
+  <div class="col-md-3 mx-auto">
+    <a class="btn btn-primary btn-block" href="/roster" role="button">View Roster</a>
+  </div>
+  <div class="col-md-3 mx-auto">
+    <a class="btn btn-primary btn-block" href="/ads" role="button">Advertisement Center</a>
+  </div>
+  <div class="col-md-3 mx-auto">
+    <a class="btn btn-primary btn-block" href="/earnings" role="button">View Earnings</a>
+  </div>
+</div>
+<br/>
+<h2>Check out where your coworkers are headed! </h2>
+<br/>
+<table>
+  <tr style="text-align: center; padding: 8px;">
+    <th>Name</th>
+    <th>EID</th>
+    <th>Location</th>
+  </tr>
+  <%db = SQLite3::Database.open('scubashop.db') %>
+  <% i = 0 %>
+  <%db.execute("SELECT DISTINCT employees.E_name, employees.EID, dive_trips.Location FROM dive_trips INNER JOIN employees ON dive_trips.EID = employees.EID
+   	") do |result| %>
+    <tr style="text-align: center; padding: 8px;">
+      <td><%=result[0]%></td>
+      <td><%=result[1]%></td>
+      <td><%=result[2]%></td>
+    </tr>
+    </tr>
+  <%end %>
+</table>
 
 </body>
 </html>

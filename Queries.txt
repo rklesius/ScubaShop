@@ -2,23 +2,19 @@ SQL Queries
 
 1) Want to be able to find all the divers that can go on a certain trip based on cert level
       
-
-<th>DTID</th>
-      <th>Location</th>
-      <th>Max Depth</th>
-      <th>Certification Level</th>
-      <th>Cost</th>
+    <tr>
+      <th>Diver ID</th>
+      <th>Name</th>
+      <th>Email</th>
     </tr>
     <%db = SQLite3::Database.open('scubashop.db') %>
     <% i = 0 %>
-    <%db.execute("SELECT DISTINCT DTID, Location, Max_depth, Cert_level_req, Cost_per_diver FROM dive_trips WHERE Cert_level_req < 3
+    <%db.execute("SELECT DISTINCT did, dname, email FROM divers WHERE cert_lvl <= 3
 	") do |result| %>
         <tr style="text-align: center; padding: 8px;">
           <td><%=result[0]%></td>
           <td><%=result[1]%></td>
           <td><%=result[2]%></td>
-          <td><%=result[3]%></td>
-          <td><%=result[4]%></td>
 	
 	** We can have the user input a cert level **
 	
@@ -30,7 +26,7 @@ SQL Queries
         </tr>
         <%db = SQLite3::Database.open('scubashop.db') %>
         <% i = 0 %>
-        <%db.execute("SELECT DISTINCT dive_trips.DTID, dive_trips.Location, dive_trips.Max_depth, dive_trips.Cert_level_req FROM dive_trips WHERE dive_trips.Max_depth < 250
+        <%db.execute("SELECT DISTINCT dive_trips.DTID, dive_trips.Location, dive_trips.Max_depth, dive_trips.Cert_level_req FROM dive_trips WHERE dive_trips.Max_depth <= 250
     	") do |result| %>
             <tr style="text-align: center; padding: 8px;">
               <td><%=result[0]%></td>
@@ -88,7 +84,7 @@ SQL Queries
     </tr>
     <%db = SQLite3::Database.open('scubashop.db') %>
     <% i = 0 %>
-    <%db.execute("SELECT DISTINCT dname, email, cert_lvl FROM divers WHERE cert_lvl > 3
+    <%db.execute("SELECT DISTINCT dname, email, cert_lvl FROM divers WHERE cert_lvl = 3
 	") do |result| %>
         <tr style="text-align: center; padding: 8px;">
           <td><%=result[0]%></td>
@@ -100,7 +96,7 @@ SQL Queries
 
 6) Find all the employees who are leading a dive who have worked at the company for more than 3 years
 
-<th>Name</th>
+      <th>Name</th>
       <th>EID</th>
       <th>Location</th>
       <th>Certification Required</th>

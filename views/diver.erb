@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TutorHub</title>
+  <title>Bubble's Scuba Shop</title>
   <link rel="icon" type="image/ico" href="/img/logo.jpg" />
 
 
@@ -31,6 +31,70 @@
 </div>
 
 <h1>Welcome diver!</h1>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <form enctype="multipart/form-data" method ="GET" action = "/dive-by-depth">
+      <div class="form-row align-items-center">
+        <div class="col my-1">
+          <label for="search" class="col-form-label">Search Trips by Max Depth: </label>
+        </div>
+        <div class="col my-1">
+          <input type="text" class="form-control" id="search" name="depth" placeholder="i.e. 30" aria-describedby="inputGroupPrepend2" required>
+        </div>
+        <div class="col my-1">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <form enctype="multipart/form-data" method ="GET" action = "/find-divers">
+      <div class="form-row align-items-center">
+        <div class="col my-1">
+          <label for="search" class="col-form-label">Search divers by certification: </label>
+        </div>
+        <div class="col my-1">
+          <input type="text" class="form-control" id="search" name="cert" placeholder="i.e. 3" aria-describedby="inputGroupPrepend2" required>
+        </div>
+        <div class="col my-1">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<h2>Check out a dive by our veteran employees! </h2>
+<p>Congratulate them for over three years of service for Bubble's</p>
+<br/>
+<table>
+  <tr style="text-align: center; padding: 8px;">
+    <th>Name</th>
+    <th>EID</th>
+    <th>Location</th>
+    <th>Certification</th>
+  </tr>
+  <%db = SQLite3::Database.open('scubashop.db') %>
+  <% i = 0 %>
+  <%db.execute("SELECT DISTINCT employees.E_name, employees.EID, dive_trips.Location, dive_trips.Cert_level_req FROM dive_trips INNER JOIN employees ON dive_trips.EID = employees.EID WHERE employees.Yrs_worked >= 3
+   	") do |result| %>
+    <tr style="text-align: center; padding: 8px;">
+      <td><%=result[0]%></td>
+      <td><%=result[1]%></td>
+      <td><%=result[2]%></td>
+      <td><%=result[3]%></td>
+    </tr>
+  <%end %>
+</table>
+
+<br/>
+<br/>
+<br/>
+
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Bubble's Scuba Shop</title>
-  <link rel="icon" type="image/ico" href="/img/TH.jpg" />
+  <link rel="icon" type="image/ico" href="/img/logo.jpg" />
 
 
   <!-- from Bootstrap starter -->
@@ -24,29 +24,31 @@
 
 <body class="container">
 
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <h1>Bubble's Scuba Shop</h1>
-    </div>
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <img class="img-fluid mx-auto" src="/img/bubbles.jpg" alt="bubbles scuba shop">
   </div>
+</div>
 
-  <table>
+<br/>
+<h1>Total earnings per trip:</h1>
+<br/>
+<table>
+  <tr style="text-align: center; padding: 8px;">
+    <th>DTID</th>
+    <th>Number of Participants</th>
+    <th>Total Earnings</th>
+  </tr>
+  <%db = SQLite3::Database.open('scubashop.db') %>
+  <% i = 0 %>
+  <%db.execute("SELECT DISTINCT divers.dtid,COUNT(*) as Count, SUM(dive_trips.Cost_per_diver) FROM dive_trips INNER JOIN divers ON dive_trips.DTID = divers.dtid GROUP BY divers.dtid, dive_trips.Location
+   	") do |result| %>
     <tr style="text-align: center; padding: 8px;">
-      <th>Diver ID</th>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Certification Level</th>
+      <td><%=result[0]%></td>
+      <td><%=result[1]%></td>
+      <td>$<%=result[2]%></td>
     </tr>
-    <%db = SQLite3::Database.open('scubashop.db') %>
-    <% i = 0 %>
-    <%db.execute("SELECT DISTINCT did, email, dname, cert_lvl FROM divers") do |result| %>
-        <tr style="text-align: center; padding: 8px;">
-          <td><%=result[0]%></td>
-          <td><%=result[1]%></td>
-          <td><%=result[2]%></td>
-          <td><%=result[3]%></td>
-        </tr>
-    <% end %>
-  </table>
+  <% end %>
+</table>
 </body>
 </html>

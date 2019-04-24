@@ -67,13 +67,13 @@ db.execute("INSERT INTO employees(EID, E_name, Salary, Title, Yrs_worked, Email,
            [4, 'Sarah', 13500, 'Newhire', 1, 'sarahfuss@gmail.com', 'password' ])
 
 db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
-           [0, "Gulf of Mexico",300,0,2,150.25])
+           [0, "Gulf of Mexico",30,0,2,150.25])
 db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
-           [1, "Gulf of Mexico",200,3,3,150.25])
+           [1, "Gulf of Mexico",20,3,3,150.25])
 db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
            [5, "Lake Apopka",100,1,2,45])
 db.execute("INSERT INTO dive_trips(DTID, Location, Max_depth, Cert_level_req, EID, Cost_per_diver) VALUES(?,?,?,?,?,?)",
-           [2, "Tampa Bay",170,4,1,35])
+           [2, "Tampa Bay",30,4,1,35])
 
 puts "Data inserted into table"
 

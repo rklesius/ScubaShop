@@ -30,27 +30,28 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-6 mx-auto my-auto form-group">
-    <section class="login">
-      <form enctype="multipart/form-data" method ="GET" action = "/login" >
-        <label for="validationDefaultUsername">Email</label>
-        <div class="input-group">
-          <input type="text" class="form-control" id="validationDefaultUsername" name = "username" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
-        </div>
-        <br/>
-        <label for="validationDefault03">Password</label>
-        <div class="input-group">
-          <input type="password" class="form-control" id="validationDefault03" name="password" placeholder="Password" required>
-        </div>
-        <div style="text-align:center; padding: 25px;">
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </form>
-    </section>
-  </div>
-</div>
+<br/>
+<h1>Trips that need to be advertised: </h1>
+<p>These are trips with only one diver going. Send them an email!</p>
+<br/>
+<table>
+  <tr style="text-align: center; padding: 8px;">
+    <th>DTID</th>
+    <th>Location</th>
+    <th>Number of Participants</th>
+    <th>Action</th>
+  </tr>
+  <%db = SQLite3::Database.open('scubashop.db') %>
+  <% i = 0 %>
+  <%db.execute("SELECT DISTINCT divers.dtid, dive_trips.Location, COUNT(*), dive_trips.Cert_level_req FROM dive_trips INNER JOIN divers ON dive_trips.DTID = divers.dtid GROUP BY divers.dtid, dive_trips.Location HAVING COUNT(divers.dtid) = 1
+   	") do |result| %>
+    <tr style="text-align: center; padding: 8px;">
+      <td><%=result[0]%></td>
+      <td><%=result[1]%></td>
+      <td><%=result[2]%></td>
+      <td><a class="btn btn-primary" href="/potential-divers/<%=result[3]%>" role="button">View potential divers</a></td>
+    </tr>
+  <% end %>
+</table>
 </body>
-
 </html>
-
