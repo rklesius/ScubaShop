@@ -9,7 +9,8 @@
     <li>gem inst sqlite3 --platform ruby</li>
 </ul>
 <p>Other than that, the only other gem you need to install is Sinatra, using gem install sinatra</p>
-
+<p>If having an error stating "missing dlopen" use the following command:"</p>
+<p>$ ridk exec pacman -S mingw-w64-x86_64-dlfcn</p>
 <h2>Running the program</h2>
 <p>To run the program, run the following files in this order:</p>
 <p><em>scubashop.rb</em> will initialize the data in the database, both creating the table and adding some data.  </p>
